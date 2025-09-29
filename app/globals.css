@@ -7,6 +7,16 @@
   --color-yellow-400: #fdd458;
 }
 
+@layer utilities {
+  .home-wrapper {
+    @apply text-gray-400 flex-col gap-1 md:gap-10 items-center sm:items-start;
+  }
+
+  .header-wrapper {
+    @apply flex justify-between items-center w-full px-[1rem] box-border bg-[#000000b1];
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
