@@ -37,4 +37,5 @@ export const connectToDBViaMongoose = async () => {
     cached.promise = null;
     throw error;
   }
+  return cached.conn;
 };

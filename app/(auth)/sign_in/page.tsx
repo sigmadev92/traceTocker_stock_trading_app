@@ -1,10 +1,14 @@
 "use client";
 import FooterLink from "@/components/forms/FooterLink";
 import InputField from "@/components/forms/InputField";
+import { signInWithEmail } from "@/lib/actions/auth.actions";
+import { useRouter } from "next/navigation";
 
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const SignInPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -19,9 +23,18 @@ const SignInPage = () => {
 
   const onSubmit = async (data: SignInFormData) => {
     try {
-      console.log(data);
+      //
+      const result = await signInWithEmail(data);
+      console.log(result);
+      if (result.success) {
+        router.push("/");
+      }
     } catch (error) {
       console.log(error);
+      toast.error("Sign In failed", {
+        description:
+          error instanceof Error ? error.message : "Failed to sign in",
+      });
     }
   };
   return (
@@ -35,11 +48,6 @@ const SignInPage = () => {
           placeholder="johndoe@example.com"
           register={register}
           error={errors.email}
-          validation={{
-            required: "Email is Required",
-            pattern: /^w+@\w\.\w+$/,
-            message: "Email address in required",
-          }}
         />
         <InputField
           name="password"
@@ -54,11 +62,7 @@ const SignInPage = () => {
             maxLength: 12,
           }}
         />
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="yellow-btn w-full mt-5"
-        >
+        <button type="submit" className="yellow-btn w-full mt-5">
           {isSubmitting ? "logging In..." : "Login"}
         </button>
         <FooterLink

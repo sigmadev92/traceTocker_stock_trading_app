@@ -20,9 +20,9 @@ const InputField = ({
         {label}
       </Label>
       <Input
-        type={type}
         placeholder={placeholder}
         disabled={disabled}
+        type={type}
         id={name}
         value={value}
         className={cn("for-input", {
