@@ -11,7 +11,7 @@ const Home = () => {
     "https://s3.tradingview.com/external-embedding/embed-widget-";
   return (
     <div className="min-h-screen flex home-wrapper p-4">
-      <section className="grid md:grid-cols-2 w-full home-section">
+      <section className="grid md:grid-cols-2 w-full">
         <div className="md:col-span-1 xl:col-span-1">
           <TradingViewWidget
             title="Market Overview"
@@ -32,7 +32,7 @@ const Home = () => {
       <section className="grid w-full gap-8 home-section">
         <div className=" h-full md:col-span-1 xl:col-span-1">
           <TradingViewWidget
-            title="Market Overview"
+            title="Top Stories"
             scriptURL={`${scriptURL}timeline.js`}
             config={TOP_STORIES_WIDGET_CONFIG}
             height={600}
@@ -40,7 +40,7 @@ const Home = () => {
         </div>
         <div className="md-col-span xl:col-span-2">
           <TradingViewWidget
-            title="Stock Heatmap"
+            title="Stocks Overview"
             scriptURL={`${scriptURL}market-quotes.js`}
             config={MARKET_DATA_WIDGET_CONFIG}
             height={300}

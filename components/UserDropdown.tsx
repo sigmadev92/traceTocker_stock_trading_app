@@ -10,8 +10,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-const UserDropdown = () => {
-  const user = { name: "Devansh", email: "support@sigmadev92.com" };
+import { useRouter } from "next/navigation";
+import { signOut } from "@/lib/actions/auth.actions";
+const UserDropdown = ({ user }: { user: User }) => {
+  const router = useRouter();
+
+  const handleSubmit = async () => {
+    await signOut();
+    router.push("/sign_in");
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -46,7 +53,7 @@ const UserDropdown = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleSubmit}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
