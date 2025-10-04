@@ -1,5 +1,8 @@
 import nodemailer from "nodemailer";
-import { WELCOME_EMAIL_TEMPLATE } from "./template";
+import {
+  NEWS_SUMMARY_EMAIL_TEMPLATE,
+  WELCOME_EMAIL_TEMPLATE,
+} from "./template";
 export const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.NODEMAILER_MAIL,
@@ -27,4 +30,29 @@ export const sendWelcomeEmail = async ({
   };
 
   await transporter.sendMail(mailOptions);
+};
+
+export const sendDailyNewsSumamry = async ({
+  email,
+  date,
+  newsContent,
+}: {
+  email: string;
+  date: string;
+  newsContent: string;
+}): Promise<void> => {
+  const htmlTemplate = NEWS_SUMMARY_EMAIL_TEMPLATE.replace(
+    "{{date}}",
+    date
+  ).replace("{{newsContent}}", newsContent);
+
+  const mailOPtions = {
+    from: `"TraceTocker News" <tracetoker@alphasystems.net>`,
+    to: email,
+    subject: `Market news Summary today - ${date}`,
+    text: `Today's market news summary from TraceTocker`,
+    html: htmlTemplate,
+  };
+
+  await transporter.sendMail(mailOPtions);
 };
