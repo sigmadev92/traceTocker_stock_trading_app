@@ -1,7 +1,6 @@
 export const NAV_ITEMS = [
   { title: "Dashboard", link: "/" },
   { title: "Search", link: "/search" },
-  { title: "WatchList", link: "/watchlist" },
 ];
 
 // Sign-up form select options
