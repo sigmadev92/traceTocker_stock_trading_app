@@ -10,7 +10,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   });
 
   if (!session?.user) {
-    redirect("/sign-in");
+    redirect("/sign_in");
   }
 
   const user = {
