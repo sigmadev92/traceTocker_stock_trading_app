@@ -12,10 +12,17 @@ import { Button } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { useRouter } from "next/navigation";
 import { signOut } from "@/lib/actions/auth.actions";
-const UserDropdown = ({ user }: { user: User }) => {
+const UserDropdown = ({
+  user,
+  initialStocks,
+}: {
+  user: User;
+  initialStocks: StockWithWatchlistStatus[];
+}) => {
   const router = useRouter();
 
   const handleSubmit = async () => {
+    console.log(initialStocks);
     await signOut();
     router.push("/sign_in");
   };
@@ -52,6 +59,7 @@ const UserDropdown = ({ user }: { user: User }) => {
             </div>
           </div>
         </DropdownMenuLabel>
+
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSubmit}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
